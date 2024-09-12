@@ -19,16 +19,23 @@ npm install
 ```
 docker-compose up -d
 ```
-5. Ejecuta
+5. Ejecuta 
 ```
 nest start --watch
 ```
 
+6. Ejecuta seed
+```
+http://localhost:PORT/api/seed
+
+```
 
 Otros: 
-- Instala los decoradores ORM
+- Instala los decoradores ORM y otros paquetes utiles
 ```
 npm i @nestjs/config
 npm install @nestjs/typeorm typeorm
 npm install pg
+npm i class-validator class-transformer
+npm install -D @types/uuid
 ```

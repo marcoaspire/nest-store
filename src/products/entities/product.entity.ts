@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ProductImage } from "./product-image.entity";
 
-@Entity()
+@Entity({name: 'products'})
 export class Product {
 
     @PrimaryGeneratedColumn('uuid')
@@ -11,7 +12,7 @@ export class Product {
     })
     title:string;
 
-    @Column('numeric',{
+    @Column('float',{
         default: 0
     })
     price:number;
@@ -33,14 +34,49 @@ export class Product {
     stock:number;
     
     @Column('text',{
-        default: 0,
+        array: true
     })
     sizes: string [];
 
     @Column('text')
-    genre: string;
+    gender: string;
 
 
-    //tags
-    // images
+    @Column('text',{
+        default: [],
+        array: true
+    })
+    tags: string [];
+    
+    @OneToMany(
+        function () { return ProductImage },
+        (productImage) => productImage.product,
+        {cascade: true, eager: true}
+    )
+    images?: ProductImage[];
+
+
+    @BeforeInsert()
+    checkSlugInsert(){
+        if ( !this.slug ){
+            this.slug = this.title;
+        }
+        this.slug = this.slug
+            .toLowerCase()
+            .replaceAll(' ','_')
+            .replaceAll("'",'');
+    }
+
+
+    @BeforeUpdate()
+    checkSlugUpdate(){
+        if ( !this.slug ){
+            this.slug = this.title;
+        }
+        this.slug = this.slug
+            .toLowerCase()
+            .replaceAll(' ','_')
+            .replaceAll("'",'');
+    }
+
 }
