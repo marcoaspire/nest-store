@@ -38,4 +38,6 @@ npm install @nestjs/typeorm typeorm
 npm install pg
 npm i class-validator class-transformer
 npm install -D @types/uuid
+npm i -D @types/multer
+npm i @nestjs/serve-static
 ```
