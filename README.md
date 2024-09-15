@@ -40,4 +40,11 @@ npm i class-validator class-transformer
 npm install -D @types/uuid
 npm i -D @types/multer
 npm i @nestjs/serve-static
+npm i bcrypt
+npm i -D @types/bcrypt
+<!-- Authentication -->
+npm install --save @nestjs/passport passport
+npm install --save @nestjs/jwt passport-jwt
+npm install --save-dev @types/passport-jwt
+
 ```
